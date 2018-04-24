@@ -1,11 +1,11 @@
 import * as functions from "firebase-functions";
+import * as admin from "firebase-admin";
+import sessionEndJob from "./scheduler/sessionEnd";
 
-// // Start writing Firebase Functions
-// // https://firebase.google.com/docs/functions/typescript
-//
-// export const helloWorld = functions.https.onRequest((request, response) => {
-//  response.send("Hello from Firebase!");
-// });
+admin.initializeApp();
+
+sessionEndJob(admin.firestore()).start();
+
 export const api = functions.https.onRequest((req, res) => {
   res.send("Hello, Hive!");
 });
